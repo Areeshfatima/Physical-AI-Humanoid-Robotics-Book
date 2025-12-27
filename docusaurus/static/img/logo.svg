@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#2c6e49" />
+  <text x="50" y="55" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle">
+    AI Robotics
+  </text>
+  <circle cx="30" cy="40" r="8" fill="#fff" />
+  <circle cx="70" cy="40" r="8" fill="#fff" />
+  <rect x="40" y="60" width="20" height="10" fill="#fff" />
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <rect width="800" height="400" fill="#f0f8ff" />
+  <text x="400" y="120" font-family="Arial" font-size="32" fill="#2c6e49" text-anchor="middle">
+    Physical AI & Humanoid Robotics
+  </text>
+  <text x="400" y="180" font-family="Arial" font-size="20" fill="#555" text-anchor="middle">
+    Advanced Concepts in Robotics and Artificial Intelligence
+  </text>
+  <g transform="translate(300, 220)">
+    <rect x="0" y="0" width="200" height="120" fill="#2c6e49" rx="10" />
+    <text x="100" y="40" font-family="Arial" font-size="16" fill="white" text-anchor="middle">
+      Humanoid Robot
+    </text>
+    <circle cx="60" cy="80" r="15" fill="white" />
+    <circle cx="140" cy="80" r="15" fill="white" />
+    <rect x="90" y="70" width="20" height="20" fill="white" />
+  </g>
+</svg>

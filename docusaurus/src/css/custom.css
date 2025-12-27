@@ -1,0 +1,129 @@
+/**
+ * Custom CSS for the Physical AI & Humanoid Robotics Textbook
+ * Academic, clean, and minimal styling
+ */
+
+/* Academic theme colors */
+:root {
+  --ifm-color-primary: #2c6e49;
+  --ifm-color-primary-dark: #255d3e;
+  --ifm-color-primary-darker: #23573a;
+  --ifm-color-primary-darkest: #1d4830;
+  --ifm-color-primary-light: #377f56;
+  --ifm-color-primary-lighter: #3a855a;
+  --ifm-color-primary-lightest: #449665;
+  --ifm-navbar-background-color: #f8f9fa;
+  --ifm-footer-background-color: #e9ecef;
+  --ifm-code-background: #f6f7f8;
+}
+
+/* Academic typography */
+html {
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+/* Clean, minimal design */
+.docusaurus-markdown-content {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* Improve readability for educational content */
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-family: 'Arial', sans-serif;
+  font-weight: 600;
+}
+
+/* Responsive design for all device sizes */
+@media (max-width: 996px) {
+  .hero__title {
+    font-size: 2rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1.2rem;
+  }
+
+  .navbar {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar__brand {
+    font-size: 1rem;
+  }
+
+  .navbar__title {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 997px) {
+  .navbar {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .hero__title {
+    font-size: 3rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1.5rem;
+  }
+}
+
+/* Accessibility enhancements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus indicators for accessibility */
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* Ensure proper color contrast for accessibility */
+.navbar__link,
+.menu__link {
+  color: #212529 !important;
+}
+
+.navbar__link:hover,
+.menu__link:hover {
+  color: #495057 !important;
+}
+
+/* Improve readability for educational content */
+.markdown {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-family: 'Arial', sans-serif;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.markdown p {
+  margin-bottom: 1rem;
+}

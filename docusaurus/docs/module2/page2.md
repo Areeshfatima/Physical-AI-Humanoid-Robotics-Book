@@ -1,0 +1,7 @@
+---
+sidebar_position: 2
+---
+
+# Module 2: Page 2
+
+This is the second page of Module 2 in the Physical AI & Humanoid Robotics textbook.
