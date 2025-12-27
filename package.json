@@ -1,0 +1,34 @@
+{
+  "name": "physical-ai-humanoid-robotics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "create-placeholders.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run docs:start",
+    "docs:start": "cd my-book && npm start",
+    "docs:build": "cd my-book && npm run build",
+    "docs:swizzle": "cd my-book && npx docusaurus swizzle",
+    "dev": "npm run docs:start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Areeshfatima/physical-ai-humanoid-robotics.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Areeshfatima/physical-ai-humanoid-robotics/issues"
+  },
+  "homepage": "https://github.com/Areeshfatima/physical-ai-humanoid-robotics#readme",
+  "dependencies": {
+    "fs-extra": "^11.3.3",
+    "glob": "^13.0.0",
+    "js-yaml": "^4.1.1",
+    "yaml": "^2.8.2"
+  }
+}
