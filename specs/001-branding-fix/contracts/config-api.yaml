@@ -1,0 +1,177 @@
+# Configuration API Contract
+
+## Overview
+This contract defines the API for updating and retrieving site configuration parameters for the Physical AI & Humanoid Robotics textbook. This simulates the configuration interface that would be used to manage branding elements, navigation structure, and other site parameters.
+
+## Base URL
+```
+http://localhost:3000/api/config
+```
+
+## Endpoints
+
+### GET /site-info
+Retrieve the current site information and branding elements.
+
+**Response:**
+```json
+{
+  "title": "string",
+  "tagline": "string",
+  "description": "string",
+  "logoPath": "string",
+  "faviconPath": "string",
+  "primaryColor": "string",
+  "secondaryColor": "string",
+  "copyrightInfo": "string"
+}
+```
+
+### PATCH /site-info
+Update site information and branding elements.
+
+**Request Body:**
+```json
+{
+  "title": "string",
+  "tagline": "string",
+  "logoPath": "string",
+  "faviconPath": "string",
+  "primaryColor": "string",
+  "secondaryColor": "string",
+  "copyrightInfo": "string"
+}
+```
+
+**Response:**
+```
+Status: 200 OK
+```
+
+### GET /navigation
+Retrieve the current navigation structure.
+
+**Response:**
+```json
+{
+  "modules": [
+    {
+      "id": "string",
+      "title": "string",
+      "path": "string",
+      "items": [
+        {
+          "id": "string",
+          "title": "string",
+          "path": "string",
+          "order": "number"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### PUT /navigation
+Update the navigation structure to match the required textbook format.
+
+**Request Body:**
+```json
+{
+  "modules": [
+    {
+      "id": "module-1",
+      "title": "Module 1",
+      "path": "/module-1",
+      "items": [
+        {
+          "id": "item-1-1",
+          "title": "Lesson 1",
+          "path": "/module-1/lesson-1",
+          "order": 1
+        }
+      ]
+    },
+    {
+      "id": "module-2", 
+      "title": "Module 2",
+      "path": "/module-2",
+      "items": [...]
+    },
+    {
+      "id": "module-3",
+      "title": "Module 3", 
+      "path": "/module-3",
+      "items": [...]
+    },
+    {
+      "id": "module-4",
+      "title": "Module 4",
+      "path": "/module-4", 
+      "items": [...]
+    }
+  ]
+}
+```
+
+**Response:**
+```
+Status: 200 OK
+```
+
+### GET /github-link
+Retrieve the current GitHub repository link configuration.
+
+**Response:**
+```json
+{
+  "repoUrl": "string",
+  "displayText": "string",
+  "showOnNavbar": "boolean"
+}
+```
+
+### PUT /github-link
+Update the GitHub repository link to point to the textbook repository.
+
+**Request Body:**
+```json
+{
+  "repoUrl": "string",
+  "displayText": "string",
+  "showOnNavbar": "boolean"
+}
+```
+
+**Response:**
+```
+Status: 200 OK
+```
+
+## Error Responses
+
+All endpoints may return the following error responses:
+
+**400 Bad Request:**
+```json
+{
+  "error": "string",
+  "message": "string"
+}
+```
+
+**500 Internal Server Error:**
+```json
+{
+  "error": "Internal Server Error",
+  "message": "An unexpected error occurred"
+}
+```
+
+## Validation Rules
+
+1. Site title and tagline must not be empty
+2. Logo path must point to a valid static asset
+3. Navigation structure must contain exactly 4 modules in the specified order
+4. GitHub repository URL must be a valid HTTPS URL
+5. All color values must be valid CSS color formats

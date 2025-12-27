@@ -1,0 +1,187 @@
+# UI Component Contracts: Docusaurus Textbook UI Enhancement
+
+## Overview
+This document defines the contractual interfaces for the UI components that implement the textbook website enhancements. These contracts ensure consistency and proper integration between different parts of the UI.
+
+## Component: CustomLogo
+
+### Interface Definition
+```typescript
+interface LogoProps {
+  src: string;           // Path to the logo image
+  alt: string;          // Alt text for accessibility
+  className?: string;   // Additional CSS classes
+  width?: number;       // Width in pixels (optional, for responsive design)
+  height?: number;      // Height in pixels (optional, for responsive design)
+}
+```
+
+### Responsibilities
+- Render the textbook logo in the navbar
+- Ensure accessibility with proper alt text
+- Support responsive design across device sizes
+- Provide fallback for missing images
+
+### Implementation Contract
+- Must use static asset path from Docusaurus configuration
+- Must include aria-label for accessibility
+- Must handle image loading errors gracefully
+
+### Validation Rules
+- Alt text must be non-empty
+- Image path must exist in static assets
+- Must maintain aspect ratio when dimensions are provided
+
+## Component: HeroSection
+
+### Interface Definition
+```typescript
+interface HeroSectionProps {
+  title: string;                    // Main heading for the hero section
+  subtitle: string;                 // Subheading or description
+  images: HeroImage[];             // Array of images to display
+  ctaButton?: CTAButton;          // Optional call-to-action button
+  className?: string;              // Additional CSS classes
+}
+
+interface HeroImage {
+  src: string;                     // Path to the image
+  alt: string;                     // Alt text for accessibility
+  caption?: string;                // Optional caption
+}
+
+interface CTAButton {
+  label: string;                   // Button text
+  href: string;                    // Link destination
+  variant?: 'primary' | 'secondary'; // Button style
+}
+```
+
+### Responsibilities
+- Display relevant robotics/AI content instead of generic images
+- Provide engaging introduction to the textbook
+- Support responsive design across all device sizes
+- Ensure accessibility compliance
+
+### Implementation Contract
+- Must not use default Docusaurus hero images
+- Must include relevant educational content
+- Must provide proper alt text for all images
+- Must be responsive to different screen sizes
+
+### Validation Rules
+- Title and subtitle must be provided
+- All images must have meaningful alt text
+- All links must be valid
+- Must pass accessibility checks
+
+## Component: CustomSidebar
+
+### Interface Definition
+```typescript
+interface SidebarProps {
+  items: SidebarItem[];            // Navigation items
+  activeItem?: string;             // Currently active item
+  className?: string;              // Additional CSS classes
+}
+
+interface SidebarItem {
+  id: string;                     // Unique identifier
+  label: string;                  // Display text
+  href: string;                   // Navigation link
+  children?: SidebarItem[];       // Sub-items (if applicable)
+}
+```
+
+### Responsibilities
+- Display navigation items in exact order: Introduction, Module 1-4
+- Highlight the currently active page
+- Support keyboard navigation for accessibility
+- Maintain consistent styling
+
+### Implementation Contract
+- Must enforce fixed ordering of items
+- Must not include auto-generated items
+- Must support keyboard navigation
+- Must highlight active page clearly
+
+### Validation Rules
+- Must contain exactly the required items in specified order
+- All navigation links must be valid
+- Must support keyboard navigation for accessibility compliance
+
+## Component: GitHubLink
+
+### Interface Definition
+```typescript
+interface GitHubLinkProps {
+  url: string;                     // GitHub repository URL
+  label?: string;                  // Link text (default: "GitHub")
+  showIcon?: boolean;              // Whether to show GitHub icon
+  location?: 'navbar' | 'footer'; // Where to display the link
+  className?: string;              // Additional CSS classes
+}
+```
+
+### Responsibilities
+- Link to the specified GitHub repository
+- Display consistently in designated location
+- Provide clear visual indication of GitHub connection
+- Follow accessibility standards
+
+### Implementation Contract
+- Must link to "https://github.com/Areeshfatima/Physical-AI-Humanoid-Robotics-Book.git"
+- Must be distinguishable from other links
+- Must be accessible via keyboard navigation
+
+### Validation Rules
+- URL must match the specified repository
+- Link must be functional
+- Must have appropriate visual indicators
+
+## Component: ThemeProvider
+
+### Interface Definition
+```typescript
+interface ThemeConfig {
+  colors: {
+    primary: string;
+    secondary: string;
+    background: string;
+    text: string;
+  };
+  typography: {
+    fontFamily: string;
+    headings: {
+      fontFamily: string;
+      fontWeight: number;
+    };
+    body: {
+      fontFamily: string;
+      fontSize: string;
+    };
+  };
+  accessibility: {
+    highContrast?: boolean;
+    fontSize?: 'small' | 'normal' | 'large';
+  };
+}
+```
+
+### Responsibilities
+- Apply academic, clean, and minimal styling
+- Ensure WCAG 2.1 AA compliance
+- Maintain consistent look and feel across all pages
+- Support accessibility preferences
+
+### Implementation Contract
+- Must apply consistent styling across all components
+- Must meet WCAG 2.1 AA contrast requirements
+- Must support responsive design
+- Must maintain readability standards
+
+### Validation Rules
+- Color contrast must meet WCAG 2.1 AA standards (4.5:1 for normal text)
+- Typography must be readable
+- Must support various screen sizes and orientations
+- Must maintain accessibility features

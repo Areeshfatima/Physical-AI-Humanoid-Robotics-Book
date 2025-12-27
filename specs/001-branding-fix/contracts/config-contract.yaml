@@ -1,0 +1,150 @@
+# Configuration Contract: Docusaurus Branding Fix
+
+## Overview
+This contract defines the expected configuration structure and values for the Docusaurus-based Physical AI & Humanoid Robotics textbook site after implementing branding fixes.
+
+## Site Metadata Contract
+
+### Required Fields
+```yaml
+title: "Physical AI & Humanoid Robotics"
+tagline: "A comprehensive textbook on physical AI and humanoid robotics"
+url: "https://your-book-domain.com"
+baseUrl: "/"
+organizationName: "your-org"
+projectName: "physical-ai-humanoid-robotics-textbook"
+favicon: "img/favicon.ico"
+```
+
+### Validation Rules
+- `title` must match exactly "Physical AI & Humanoid Robotics"
+- `tagline` must be descriptive of the textbook content
+- `url` must be a valid HTTPS URL
+- `favicon` must point to a valid image file in the static directory
+
+## Navigation Contract
+
+### Navbar Structure
+```yaml
+navbar:
+  title: "Physical AI & Humanoid Robotics"
+  logo:
+    alt: "Physical AI & Humanoid Robotics Logo"
+    src: "img/logo.svg"
+  items:
+    - type: "docSidebar"
+      sidebarId: "tutorialSidebar"
+      position: "left"
+      label: "Textbook"
+    - href: "https://github.com/your-username/your-book-repo"
+      label: "GitHub"
+      position: "right"
+```
+
+### Validation Rules
+- Navbar title must match the site title
+- Logo alt text must be descriptive
+- Logo src must point to a valid image file
+- GitHub link must point to the textbook repository, not Docusaurus
+
+## Footer Contract
+
+### Footer Structure
+```yaml
+footer:
+  style: "dark"
+  links: []
+  copyright: "Copyright © <current-year> Physical AI & Humanoid Robotics Textbook. Built with Docusaurus."
+```
+
+### Validation Rules
+- Footer must only contain the book copyright information
+- No additional links or Docusaurus-specific content
+- Copyright year must be current or dynamically set
+
+## Sidebar Contract
+
+### Expected Structure
+```yaml
+tutorialSidebar:
+  - type: "category"
+    label: "Module 1"
+    items: [...]
+  - type: "category"
+    label: "Module 2"
+    items: [...]
+  - type: "category"
+    label: "Module 3"
+    items: [...]
+  - type: "category"
+    label: "Module 4"
+    items: [...]
+```
+
+### Validation Rules
+- Exactly 4 top-level categories
+- Labels must be exactly "Module 1", "Module 2", "Module 3", "Module 4"
+- No additional categories or auto-generated items
+- Items within each category should be relevant to the module
+
+## Image Rendering Contract
+
+### Static Asset Requirements
+```yaml
+staticAssets:
+  logo: "img/logo.svg"  # or .png
+  favicon: "img/favicon.ico"
+  contentImages: 
+    - path: "/img/"
+      format: "webp|png|jpg|svg"
+      altRequired: true
+      optimized: true
+```
+
+### Validation Rules
+- All image references must use absolute paths from the static directory
+- Every image must have appropriate alt text for accessibility
+- Images must load within 3 seconds (optimized)
+- Fallback mechanisms should be in place for unavailable images
+
+## Accessibility Contract
+
+### WCAG 2.1 AA Compliance
+```yaml
+accessibility:
+  altTextForImages: true
+  colorContrast: "4.5:1 minimum for normal text"
+  semanticHTML: true
+  keyboardNavigation: true
+  AriaLabels: true
+```
+
+## Performance Contract
+
+### Load Time Requirements
+```yaml
+performance:
+  imageLoadTime: "< 3 seconds on standard broadband"
+  pageLoadTime: "< 5 seconds on standard broadband"
+  assetOptimization: required
+```
+
+## Non-Functional Requirements
+
+### What Should NOT Change
+- Core Docusaurus functionality (search, etc.)
+- Page structure beyond branding elements
+- Valid YAML and ASCII-safe characters in frontmatter
+- URLs for existing content (unless specifically redirected)
+
+## Success Criteria Contract
+
+### Verification Points
+1. No "Docusaurus" text appears anywhere on the site
+2. All images render correctly (not as alt text)
+3. Sidebar shows exactly 4 modules in correct order with no extras
+4. GitHub link points to textbook repository
+5. Footer contains only copyright information
+6. All frontmatter uses ASCII-safe characters with valid YAML
+7. Site meets WCAG 2.1 AA accessibility standards
+8. All images load within 3 seconds

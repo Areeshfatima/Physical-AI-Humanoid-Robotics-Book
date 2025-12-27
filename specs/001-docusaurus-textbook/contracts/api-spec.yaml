@@ -1,0 +1,590 @@
+openapi: 3.0.0
+info:
+  title: Educational Textbook API for Physical AI & Humanoid Robotics
+  description: API for managing educational content and user interactions with the textbook
+  version: 1.0.0
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+  - url: https://staging-api.example.com/v1
+    description: Staging server
+
+paths:
+  /modules:
+    get:
+      summary: List all modules
+      description: Retrieve a list of all textbook modules
+      responses:
+        '200':
+          description: A list of modules
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Module'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  
+  /modules/{moduleId}:
+    get:
+      summary: Get a specific module
+      description: Retrieve details of a specific module by ID
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the module to retrieve
+      responses:
+        '200':
+          description: Module details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  
+  /modules/{moduleId}/chapters:
+    get:
+      summary: List chapters in a module
+      description: Retrieve all chapters within a specific module
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the module
+      responses:
+        '200':
+          description: A list of chapters in the module
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chapter'
+  
+  /chapters:
+    get:
+      summary: List all chapters
+      description: Retrieve a paginated list of all chapters
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+          description: Number of chapters to return
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+          description: Number of chapters to skip
+      responses:
+        '200':
+          description: A list of chapters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Chapter'
+                  total:
+                    type: integer
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+  
+  /chapters/{chapterId}:
+    get:
+      summary: Get a specific chapter
+      description: Retrieve details of a specific chapter by ID
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the chapter to retrieve
+      responses:
+        '200':
+          description: Chapter details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chapter'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  
+  /chapters/{chapterId}/export:
+    post:
+      summary: Export a chapter
+      description: Export a chapter in the requested format (PDF, etc.)
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the chapter to export
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum: [pdf, epub]
+            default: pdf
+          description: Export format
+      responses:
+        '200':
+          description: Exported content
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  
+  /search:
+    get:
+      summary: Search content
+      description: Search across all modules and chapters
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Search query
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+          description: Number of results to return
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  query:
+                    type: string
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SearchResult'
+                  took:
+                    type: number
+                    description: Time taken for search in milliseconds
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+  
+  /progress:
+    get:
+      summary: Get user progress
+      description: Retrieve progress for all chapters for the authenticated user
+      responses:
+        '200':
+          description: User progress across all chapters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserProgress'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    
+    post:
+      summary: Update user progress
+      description: Update progress for a specific chapter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProgressInput'
+      responses:
+        '200':
+          description: Updated progress
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProgress'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  
+  /progress/{chapterId}:
+    get:
+      summary: Get progress for a specific chapter
+      description: Retrieve progress for a specific chapter for the authenticated user
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the chapter
+      responses:
+        '200':
+          description: User progress for the chapter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProgress'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  
+  /auth/login:
+    post:
+      summary: User login
+      description: Authenticate a user and return a token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  user:
+                    $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  
+  /auth/logout:
+    post:
+      summary: User logout
+      description: Invalidate the user's session
+      responses:
+        '200':
+          description: Logout successful
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /rag/query:
+    post:
+      summary: RAG query
+      description: Submit a query to the RAG system for textbook-based answers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The query to submit to the RAG system
+                context:
+                  type: string
+                  description: Additional context for the query
+      responses:
+        '200':
+          description: RAG response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RAGResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+
+components:
+  schemas:
+    Module:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the module
+        title:
+          type: string
+          description: Title of the module
+        description:
+          type: string
+          description: Brief description of the module content
+        position:
+          type: integer
+          description: Order of the module in the textbook
+        chapters:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChapterSummary'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    
+    Chapter:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the chapter
+        title:
+          type: string
+          description: Title of the chapter
+        moduleId:
+          type: string
+          description: Reference to the parent module
+        content:
+          type: string
+          description: The actual chapter content in Markdown format
+        position:
+          type: integer
+          description: Order of the chapter within the module
+        estimatedReadingTime:
+          type: integer
+          description: Estimated reading time in minutes
+        objectives:
+          type: array
+          items:
+            type: string
+          description: Learning objectives for the chapter
+        mediaAssets:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaAsset'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    
+    ChapterSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the chapter
+        title:
+          type: string
+          description: Title of the chapter
+        position:
+          type: integer
+          description: Order of the chapter within the module
+        estimatedReadingTime:
+          type: integer
+          description: Estimated reading time in minutes
+    
+    MediaAsset:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the media asset
+        url:
+          type: string
+          description: URL to the media asset
+        type:
+          type: string
+          enum: [image, video, diagram, equation]
+          description: Type of media asset
+        caption:
+          type: string
+          description: Caption for the media asset
+    
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the user
+        username:
+          type: string
+          description: Unique username
+        email:
+          type: string
+          format: email
+          description: User's email address
+        role:
+          type: string
+          enum: [reader, editor, admin]
+          description: User's role in the system
+        createdAt:
+          type: string
+          format: date-time
+          description: Account creation timestamp
+        lastLogin:
+          type: string
+          format: date-time
+          description: Timestamp of last login
+    
+    UserProgress:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the progress record
+        userId:
+          type: string
+          description: Identifier for the user
+        chapterId:
+          type: string
+          description: Reference to the chapter being tracked
+        status:
+          type: string
+          enum: [in-progress, completed]
+          description: Current status of the chapter
+        lastAccessed:
+          type: string
+          format: date-time
+          description: Timestamp of last access
+        progressPercentage:
+          type: integer
+          description: Progress percentage (0-100)
+        notes:
+          type: string
+          description: Optional user notes on the chapter
+    
+    UserProgressInput:
+      type: object
+      properties:
+        chapterId:
+          type: string
+          description: Reference to the chapter being updated
+        status:
+          type: string
+          enum: [in-progress, completed]
+        progressPercentage:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Progress percentage
+        notes:
+          type: string
+          description: Optional user notes
+    
+    SearchResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the found item
+        type:
+          type: string
+          enum: [module, chapter, section]
+          description: Type of the found item
+        title:
+          type: string
+          description: Title of the found item
+        content:
+          type: string
+          description: Snippet of content that matches the search
+        url:
+          type: string
+          description: URL to access the found item
+        score:
+          type: number
+          description: Relevance score
+    
+    RAGResponse:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The original query
+        answer:
+          type: string
+          description: The answer generated by the RAG system
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+        confidence:
+          type: number
+          description: Confidence score of the answer
+    
+    Source:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifier for the source
+        title:
+          type: string
+          description: Title of the source
+        type:
+          type: string
+          enum: [module, chapter, section]
+          description: Type of the source
+        url:
+          type: string
+          description: URL to the source
+        content:
+          type: string
+          description: Relevant content from the source
+    
+    Metadata:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        lastUpdatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        author:
+          type: string
+          description: Author of the content
+    
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+        details:
+          type: object
+          description: Additional error details
+
+  responses:
+    UnauthorizedError:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    BadRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

@@ -1,0 +1,312 @@
+# API Contracts: Textbook Content Management for Physical AI & Humanoid Robotics
+
+These API contracts define endpoints that may be used for content management, search functionality, and RAG chatbot integration for the Physical AI & Humanoid Robotics textbook.
+
+## Content Management APIs
+
+### GET /api/v1/modules
+**Description**: Retrieve all textbook modules
+
+**Request**:
+- Method: GET
+- Path: /api/v1/modules
+- Headers: None required
+- Query Parameters: None
+
+**Response**:
+```json
+{
+  "modules": [
+    {
+      "id": "module-1-ros2",
+      "title": "ROS2 Fundamentals",
+      "description": "Fundamental concepts of Robot Operating System 2",
+      "position": 1,
+      "chapters_count": 4,
+      "estimated_duration_hours": 10
+    },
+    {
+      "id": "module-2-digital-twin", 
+      "title": "Digital Twins (Gazebo & Unity)",
+      "description": "Creating digital twins using Gazebo and Unity",
+      "position": 2,
+      "chapters_count": 4,
+      "estimated_duration_hours": 12
+    },
+    {
+      "id": "module-3-isaac",
+      "title": "AI-Robot Brain (NVIDIA Isaac)",
+      "description": "Implementing AI for robot brains using NVIDIA Isaac",
+      "position": 3,
+      "chapters_count": 4,
+      "estimated_duration_hours": 15
+    },
+    {
+      "id": "module-4-vla",
+      "title": "Vision-Language-Action (VLA) Models",
+      "description": "Vision-Language-Action models for robotics",
+      "position": 4,
+      "chapters_count": 4,
+      "estimated_duration_hours": 12
+    }
+  ],
+  "total_count": 4
+}
+```
+
+**Status Codes**:
+- 200: Success
+- 500: Server error
+
+---
+
+### GET /api/v1/modules/{module_id}
+**Description**: Retrieve details about a specific module and its chapters
+
+**Request**:
+- Method: GET
+- Path: /api/v1/modules/{module_id}
+- Headers: None required
+- Path Parameters: 
+  - module_id: string (e.g. "module-1-ros2")
+
+**Response**:
+```json
+{
+  "module": {
+    "id": "module-1-ros2",
+    "title": "ROS2 Fundamentals",
+    "description": "Fundamental concepts of Robot Operating System 2",
+    "position": 1,
+    "chapters": [
+      {
+        "id": "module-1-ros2-chapter-1",
+        "title": "ROS2 Overview and Architecture",
+        "position": 1,
+        "estimated_reading_time": 30,
+        "learning_objectives": [
+          "Understand ROS2 architecture basics",
+          "Identify key differences from ROS1",
+          "Explain DDS communication layer"
+        ]
+      },
+      {
+        "id": "module-1-ros2-chapter-2", 
+        "title": "ROS2 Nodes and Topics",
+        "position": 2,
+        "estimated_reading_time": 35,
+        "learning_objectives": [
+          "Create and manage ROS2 nodes",
+          "Implement publisher-subscriber patterns",
+          "Configure Quality of Service settings"
+        ]
+      },
+      {
+        "id": "module-1-ros2-chapter-3",
+        "title": "ROS2 Services and Actions",
+        "position": 3,
+        "estimated_reading_time": 40,
+        "learning_objectives": [
+          "Implement service-client communication",
+          "Design action-based workflows",
+          "Choose between services and actions appropriately"
+        ]
+      },
+      {
+        "id": "module-1-ros2-chapter-4",
+        "title": "ROS2 Launch Systems and Package Management",
+        "position": 4,
+        "estimated_reading_time": 35,
+        "learning_objectives": [
+          "Create launch files for complex systems",
+          "Manage ROS2 packages effectively",
+          "Organize projects with proper package structure"
+        ]
+      }
+    ]
+  }
+}
+```
+
+**Status Codes**:
+- 200: Success
+- 404: Module not found
+- 500: Server error
+
+---
+
+### GET /api/v1/search
+**Description**: Search across all textbook content
+
+**Request**:
+- Method: GET
+- Path: /api/v1/search
+- Headers: None required
+- Query Parameters:
+  - q: string (search query, required)
+  - limit: integer (max results, default 10, max 50)
+  - offset: integer (pagination offset, default 0)
+
+**Response**:
+```json
+{
+  "query": "DDS communication",
+  "results": [
+    {
+      "id": "module-1-ros2-chapter-1-section-2",
+      "title": "DDS-Based Communication",
+      "type": "section",
+      "module_id": "module-1-ros2",
+      "module_title": "ROS2 Fundamentals",
+      "chapter_id": "module-1-ros2-chapter-1",
+      "chapter_title": "ROS2 Overview and Architecture",
+      "url": "/docs/module-1-ros2/chapter-1#dds-based-communication",
+      "preview": "The core of ROS2's architecture is its DDS-based communication layer. DDS provides publisher-subscriber communication...",
+      "score": 0.95
+    },
+    {
+      "id": "module-1-ros2-chapter-1-section-3",
+      "title": "Quality of Service (QoS)",
+      "type": "section",
+      "module_id": "module-1-ros2",
+      "module_title": "ROS2 Fundamentals",
+      "chapter_id": "module-1-ros2-chapter-1",
+      "chapter_title": "ROS2 Overview and Architecture",
+      "url": "/docs/module-1-ros2/chapter-1#quality-of-service-qos",
+      "preview": "One of the key features of ROS2 is its flexible QoS system, which allows fine-tuning communication behavior...",
+      "score": 0.87
+    }
+  ],
+  "total_results": 2,
+  "took_ms": 120
+}
+```
+
+**Status Codes**:
+- 200: Success
+- 400: Invalid query parameters
+- 500: Server error
+
+---
+
+### GET /api/v1/content/{path}
+**Description**: Retrieve specific content by path for the RAG system
+
+**Request**:
+- Method: GET
+- Path: /api/v1/content/{path}
+- Headers: None required
+- Path Parameters:
+  - path: string (content path, e.g. "module-1-ros2/chapter-1")
+
+**Response**:
+```json
+{
+  "content": {
+    "id": "module-1-ros2-chapter-1",
+    "title": "ROS2 Overview and Architecture",
+    "module": "module-1-ros2",
+    "module_title": "ROS2 Fundamentals",
+    "type": "chapter",
+    "text": "# ROS2 Overview and Architecture\n\n## Learning Objectives\n\nAfter completing this chapter, you should be able to:\n- Define ROS2 and explain its significance in robotics\n- Differentiate between ROS and ROS2 architectures\n- Understand the role of DDS in ROS2 communication\n\n## Introduction to ROS2\n\nRobot Operating System 2 (ROS2) is the next generation of the Robot Operating System framework...\n\n[Additional content continues]",
+    "metadata": {
+      "estimated_reading_time": 30,
+      "word_count": 1200,
+      "last_updated": "2025-12-17T10:30:00Z",
+      "learning_objectives": [
+        "Define ROS2 and explain its significance in robotics",
+        "Differentiate between ROS and ROS2 architectures",
+        "Understand the role of DDS in ROS2 communication"
+      ]
+    }
+  }
+}
+```
+
+**Status Codes**:
+- 200: Success
+- 404: Content not found
+- 500: Server error
+
+---
+
+## RAG Chatbot APIs
+
+### POST /api/v1/chat/query
+**Description**: Submit a query to the RAG chatbot for textbook-based responses
+
+**Request**:
+- Method: POST
+- Path: /api/v1/chat/query
+- Headers: 
+  - Content-Type: application/json
+- Body:
+```json
+{
+  "query": "Explain how DDS works in ROS2",
+  "context_window": 4096,
+  "temperature": 0.7,
+  "max_tokens": 500,
+  "include_sources": true
+}
+```
+
+**Response**:
+```json
+{
+  "response": "DDS (Data Distribution Service) in ROS2 provides the communication layer that enables reliable, real-time data exchange between nodes. Unlike ROS1's centralized master architecture, ROS2 uses DDS to implement a distributed communication model where nodes discover each other directly. DDS provides Quality of Service (QoS) policies that allow fine-tuning of communication behavior based on application requirements such as reliability, durability, and liveliness.",
+  "sources": [
+    {
+      "id": "module-1-ros2-chapter-1-section-2",
+      "title": "DDS-Based Communication",
+      "url": "/docs/module-1-ros2/chapter-1#dds-based-communication",
+      "relevance_score": 0.95
+    },
+    {
+      "id": "module-1-ros2-chapter-1-section-3",
+      "title": "Quality of Service (QoS)",
+      "url": "/docs/module-1-ros2/chapter-1#quality-of-service-qos",
+      "relevance_score": 0.82
+    }
+  ],
+  "took_ms": 850
+}
+```
+
+**Status Codes**:
+- 200: Success
+- 400: Invalid request body
+- 500: Server error
+
+---
+
+### GET /api/v1/chat/history/{user_id}
+**Description**: Retrieve chat history for a user
+
+**Request**:
+- Method: GET
+- Path: /api/v1/chat/history/{user_id}
+- Headers: None required
+- Path Parameters:
+  - user_id: string (user identifier)
+
+**Response**:
+```json
+{
+  "user_id": "user-12345",
+  "conversations": [
+    {
+      "id": "conv-67890",
+      "timestamp": "2025-12-17T10:15:00Z",
+      "query": "Explain how DDS works in ROS2",
+      "response_summary": "Explanation of DDS in ROS2 architecture",
+      "interaction_count": 1
+    }
+  ]
+}
+```
+
+**Status Codes**:
+- 200: Success
+- 404: User not found
+- 500: Server error
