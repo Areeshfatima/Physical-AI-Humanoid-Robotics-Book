@@ -1,0 +1,116 @@
+---
+title: "ROS2 Overview and Architecture"
+sidebar_position: 2
+description: "Understanding the core concepts and architecture of ROS2"
+keywords: "ROS2,architecture,DDS,middleware,nodes,communication"
+id: "chapter-1"
+---
+# ROS2 Overview and Architecture
+
+## Learning Objectives
+
+After completing this chapter, you should be able to:
+- Differentiate between ROS and ROS2 architectures
+- Explain the role of DDS in ROS2 communication
+- Identify key features that make ROS2 suitable for commercial applications
+- Describe the core components of the ROS2 ecosystem
+
+## Introduction to ROS2
+
+Robot Operating System 2 (ROS2) is the next generation of the Robot Operating System framework. While ROS1 established itself as the de facto standard for robotics development, ROS2 was built from the ground up to address critical limitations in ROS1, particularly regarding scalability, security, and support for commercial applications.
+
+## Key Differences from ROS1
+
+ROS2 introduces several fundamental changes from ROS1:
+
+1. **Middleware Infrastructure**: ROS2 uses DDS (Data Distribution Service) as its communication middleware, providing robust Quality of Service (QoS) policies and improved communication reliability.
+2. **Multi-Robot Support**: Native support for multi-robot systems with improved namespace handling and distributed communication.
+3. **Security**: Built-in security framework (SROS2) with authentication, access control, and message encryption.
+4. **Real-Time Support**: Enhanced support for real-time applications with improved timing guarantees.
+5. **Cross-Platform**: Better support for Windows, macOS, and embedded systems.
+
+## Architecture Overview
+
+### DDS-Based Communication
+
+The core of ROS2's architecture is its DDS-based communication layer. DDS provides:
+
+- **Publisher-Subscriber Communication**: For streaming data between nodes
+- **Service-Client Communication**: For request-response interactions
+- **Action Communication**: For long-running tasks with feedback and goal management
+
+![ROS2 Architecture Diagram](./images/ros2-architecture.png)
+*Figure 1.1: ROS2 architecture showing the DDS communication layer and node interactions*
+
+### Nodes and Processes
+
+In ROS2, nodes run as separate processes rather than being managed by a central master. This provides:
+
+- **Process Isolation**: Crashes in one node don't affect others
+- **Improved Fault Tolerance**: Better error handling and isolation
+- **Enhanced Security**: Better access control per process
+
+### Packages and Workspaces
+
+ROS2 uses ament as its build system, which provides:
+
+- **Flexible Dependency Management**: Support for both CMake and Python packages
+- **Isolated Development**: Multiple workspaces for different projects
+- **Better Integration**: Improved external tooling support
+
+## Core Concepts
+
+### Package Structure
+
+A typical ROS2 package contains:
+
+```text
+my_package/
+├── CMakeLists.txt          # Build configuration for C++ packages
+├── package.xml             # Package metadata and dependencies
+├── src/                    # Source code files
+├── include/my_package/     # Header files (for C++)
+├── launch/                 # Launch files for starting nodes
+├── config/                 # Configuration files
+├── test/                   # Test files
+└── scripts/                # Executable Python scripts
+```
+
+### Interface Definitions
+
+ROS2 uses Interface Definition Language (IDL) files to define message types:
+
+- **.msg files**: Define message structures for topics
+- **.srv files**: Define request/response structures for services
+- **.action files**: Define goal/feedback/result structures for actions
+
+## Quality of Service (QoS)
+
+One of the key features of ROS2 is its flexible QoS system, which allows fine-tuning communication behavior:
+
+- **Reliability**: Reliable vs. best-effort delivery
+- **Durability**: Volatile vs. transient-local durability
+- **History**: Keep-all vs. keep-last history policies
+- **Depth**: Size of message queues
+
+## Ecosystem and Tools
+
+ROS2 provides a rich ecosystem of tools:
+
+- **Rviz2**: 3D visualization environment
+- **rqt**: GUI tools for monitoring and control
+- **rosbag2**: Data recording and playback
+- **launch**: System startup and configuration
+- **composition**: Component-based node composition
+
+## Summary
+
+ROS2 represents a significant evolution in robotics software development, providing a more robust, secure, and scalable framework for complex robotic systems. Its DDS-based architecture enables better performance in multi-robot and distributed systems, making it ideal for physical AI and humanoid robotics applications.
+
+## Exercises
+
+1. Research and compare the differences between ROS1 and ROS2 architectures. Create a table highlighting at least 5 key differences.
+2. Find three different DDS implementations that can be used with ROS2 and compare their features.
+3. Install ROS2 Humble Hawksbill on your system and run the basic tutorials.
+
+[Next: ROS2 Nodes and Topics](./chapter-2.md) | [Previous: Module Introduction](./index.md)

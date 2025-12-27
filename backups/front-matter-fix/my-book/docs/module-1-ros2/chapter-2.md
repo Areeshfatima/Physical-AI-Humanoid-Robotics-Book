@@ -1,0 +1,238 @@
+---
+title: ROS2 Nodes and Topics
+sidebar_position: 3
+description: Mastering fundamental communication patterns with ROS2 nodes and topics
+keywords:
+  - ROS2
+  - nodes
+  - topics
+  - publishers
+  - subscribers
+  - communication
+id: chapter-2
+---
+
+
+
+
+
+
+# ROS2 Nodes and Topics
+
+## Learning Objectives
+
+After completing this chapter, you should be able to:
+- Create and implement ROS2 nodes in both C++ and Python
+- Design publisher-subscriber communication patterns
+- Configure Quality of Service (QoS) settings appropriately
+- Apply best practices for node design and resource management
+
+## Introduction to Nodes
+
+In ROS2, a **node** is a process that performs computation. Nodes are the fundamental building blocks of a ROS2 system. Each node is typically responsible for a specific task in the robot's operation, such as sensor data processing, motion control, or decision making.
+
+## Node Concepts and Implementation
+
+### Creating a Basic Node
+
+A minimal ROS2 node can be implemented in either C++ or Python. Here's an example in Python:
+
+```python
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
+
+
+class MinimalPublisher(Node):
+
+    def __init__(self):
+        super().__init__('minimal_publisher')
+        self.publisher_ = self.create_publisher(String, 'topic', 10)
+        timer_period = 0.5  # seconds
+        self.timer = self.create_timer(timer_period, self.timer_callback)
+        self.i = 0
+
+    def timer_callback(self):
+        msg = String()
+        msg.data = 'Hello World: %d' % self.i
+        self.publisher_.publish(msg)
+        self.get_logger().info('Publishing: "%s"' % msg.data)
+        self.i += 1
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    minimal_publisher = MinimalPublisher()
+    rclpy.spin(minimal_publisher)
+    minimal_publisher.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
+```
+
+To run this publisher:
+1. Make sure your ROS2 environment is sourced: `source /opt/ros/humble/setup.bash`
+2. Create a new package: `ros2 pkg create --build-type ament_python minimal_publisher`
+3. Place this code in `minimal_publisher/minimal_publisher/publisher_member_function.py`
+4. Run: `ros2 run minimal_publisher publisher_member_function`
+
+### Node Lifecycle
+
+ROS2 nodes have a more sophisticated lifecycle compared to ROS1:
+
+- **Unconfigured**: Initial state
+- **Inactive**: Configured but not active
+- **Active**: Running and participating in communications
+- **Finalized**: Shutdown state
+
+This allows for better coordination of system startup and shutdown.
+
+## Topics and Publishing/Subscription
+
+### Topic Communication
+
+Topics in ROS2 enable **publisher-subscriber** communication patterns. This is a one-to-many relationship where:
+
+- **Publishers** send messages to a topic
+- **Subscribers** receive messages from a topic
+- Multiple publishers and subscribers can exist for the same topic
+
+![ROS2 Topic Communication Diagram](./images/topic-communication.png)
+*Figure 2.1: ROS2 topic communication showing the publisher-subscriber pattern*
+
+### Message Types
+
+Messages are defined in `.msg` files and must be compatible between publishers and subscribers. Common message types include:
+
+- **std_msgs**: Basic data types (String, Int32, Float64, etc.)
+- **sensor_msgs**: Sensor data (Image, LaserScan, etc.)
+- **geometry_msgs**: Spatial relationships (Point, Pose, Twist, etc.)
+- **nav_msgs**: Navigation-specific messages (Odometry, Path, etc.)
+
+### Quality of Service (QoS) in Topics
+
+QoS profiles allow fine-tuning of communication behavior:
+
+```python
+from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy
+
+# Configure a QoS profile for sensor data (best effort, keep last 10)
+qos_profile = QoSProfile(
+    reliability=QoSReliabilityPolicy.BEST_EFFORT,
+    history=QoSHistoryPolicy.KEEP_LAST,
+    depth=10
+)
+
+publisher = node.create_publisher(LaserScan, 'sensor_scan', qos_profile)
+```
+
+## Advanced Node Concepts
+
+### Parameters
+
+Nodes can accept parameters that can be configured at runtime:
+
+```python
+class ParameterNode(Node):
+
+    def __init__(self):
+        super().__init__('parameter_node')
+        self.declare_parameter('my_parameter', 'default_value')
+        
+    def get_parameter_value(self):
+        return self.get_parameter('my_parameter').value
+```
+
+Parameters offer flexibility in configuring node behavior without recompilation.
+
+### Names and Namespaces
+
+Nodes, topics, and services use a hierarchical naming system:
+
+- **Names**: Simple identifiers (e.g., `/cmd_vel`)
+- **Namespaces**: Grouping mechanism (e.g., `/robot1/cmd_vel`)
+- **Private Names**: Node-specific names (e.g., `~parameter_name`)
+
+## Practical Example: Turtle Simulator
+
+Let's consider a practical example with the turtle simulator:
+
+```python
+import rclpy
+from rclpy.node import Node
+from geometry_msgs.msg import Twist
+from turtlesim.msg import Pose
+
+class TurtleController(Node):
+
+    def __init__(self):
+        super().__init__('turtle_controller')
+        
+        # Publisher for velocity commands
+        self.cmd_vel_publisher = self.create_publisher(
+            Twist, 
+            '/turtle1/cmd_vel', 
+            10
+        )
+        
+        # Subscriber for pose information
+        self.pose_subscriber = self.create_subscription(
+            Pose,
+            '/turtle1/pose',
+            self.pose_callback,
+            10
+        )
+        
+        # Timer for control loop
+        self.timer = self.create_timer(0.1, self.control_loop)
+        
+    def pose_callback(self, msg):
+        self.current_pose = msg
+        
+    def control_loop(self):
+        # Implement control logic here
+        cmd_msg = Twist()
+        cmd_msg.linear.x = 1.0  # Move forward
+        cmd_msg.angular.z = 0.5  # Turn slightly
+        self.cmd_vel_publisher.publish(cmd_msg)
+
+def main(args=None):
+    rclpy.init(args=args)
+    controller = TurtleController()
+    rclpy.spin(controller)
+    controller.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+```
+
+## Best Practices
+
+### Node Design
+
+1. **Single Responsibility**: Each node should have a clear, single purpose
+2. **Efficient Resource Usage**: Properly manage memory and CPU resources
+3. **Error Handling**: Implement robust error handling and recovery mechanisms
+4. **Parameter Configuration**: Use parameters for configurable behavior
+
+### Topic Communication
+
+1. **Appropriate QoS**: Choose QoS settings based on data requirements
+2. **Message Optimization**: Design efficient message structures
+3. **Rate Limiting**: Publish at appropriate rates to avoid overwhelming subscribers
+4. **Topic Naming Conventions**: Use descriptive and consistent naming
+
+## Summary
+
+Nodes and topics form the foundation of ROS2 communication. Understanding how to properly design nodes and utilize topic-based communication patterns is essential for developing robust robotic applications. The next chapter will explore more advanced communication patterns with [services and actions](./chapter-3.md), which provide request-response and goal-oriented interaction models.
+
+## Exercises
+
+1. Create a simple ROS2 publisher that publishes sensor data (e.g., temperature readings) at 1Hz.
+2. Implement a subscriber that listens to the publisher from exercise 1 and logs the data to a file.
+3. Experiment with different QoS settings (reliability, durability) and observe how they affect communication.
+
+[Next: ROS2 Services and Actions](./chapter-3.md) | [Previous: ROS2 Overview and Architecture](./chapter-1.md)
