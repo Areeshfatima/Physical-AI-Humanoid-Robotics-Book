@@ -1,0 +1,125 @@
+# UI Branding Configuration Contract
+
+openapi: 3.0.0
+info:
+  title: UI Branding Configuration API
+  description: Contract defining the configuration for UI branding elements in the Physical AI & Humanoid Robotics textbook website
+  version: 1.0.0
+
+paths:
+  /config/branding:
+    get:
+      summary: Get branding configuration
+      responses:
+        '200':
+          description: Branding configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandingConfig'
+              
+  /config/navigation:
+    get:
+      summary: Get navigation configuration
+      responses:
+        '200':
+          description: Navigation configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NavigationConfig'
+
+components:
+  schemas:
+    BrandingConfig:
+      type: object
+      properties:
+        logo:
+          type: object
+          properties:
+            src:
+              type: string
+              description: URL to the custom logo with robotics elements
+            alt:
+              type: string
+              description: Alt text for accessibility
+            width:
+              type: integer
+              description: Logo width in pixels
+            height:
+              type: integer
+              description: Logo height in pixels
+          required:
+            - src
+            - alt
+        footer:
+          type: object
+          properties:
+            copyright:
+              type: string
+              description: Publisher copyright information
+            showGitHubLink:
+              type: boolean
+              description: Whether to show GitHub link to official repository
+            githubUrl:
+              type: string
+              description: URL to the official project repository
+          required:
+            - copyright
+            - showGitHubLink
+            - githubUrl
+      required:
+        - logo
+        - footer
+
+    NavigationConfig:
+      type: object
+      properties:
+        sidebarItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/NavigationItem'
+          description: List of navigation items in sidebar
+        introductionFirst:
+          type: boolean
+          description: Whether the Introduction is at the top of the sidebar
+      required:
+        - sidebarItems
+        - introductionFirst
+
+    NavigationItem:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Display title of the navigation item
+        path:
+          type: string
+          description: URL path for the navigation item
+        order:
+          type: integer
+          description: Order position in the navigation
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/NavigationItem'
+      required:
+        - title
+        - path
+        - order
+
+    ImageConfig:
+      type: object
+      properties:
+        loadingTimeLimit:
+          type: integer
+          description: Maximum loading time in seconds
+          default: 2
+        fallbackStrategy:
+          type: string
+          description: Strategy for handling broken images
+          enum: [placeholder, hide, alt_text]
+          default: placeholder
+      required:
+        - loadingTimeLimit
+        - fallbackStrategy
