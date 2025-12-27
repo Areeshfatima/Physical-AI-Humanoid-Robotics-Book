@@ -1,0 +1,80 @@
+# Docusaurus Markdown Front Matter Fixer Specification
+
+## Overview
+This specification defines a tool to scan, validate, and fix Docusaurus markdown files with broken or invalid front matter, addressing the "Cannot destructure property 'frontMatter'" error.
+
+## Requirements
+
+### Input Requirements
+- Scan all .md and .mdx files under `/docs` directory
+- Recursively process subdirectories
+- Identify files with missing, malformed, or invalid YAML front matter
+
+### Processing Requirements
+- Remove broken or invalid front matter completely
+- Generate fresh, valid YAML front matter
+- Ensure all values are ASCII-only
+- Remove/replace special characters: `+ : & ? {} []` 
+- Auto-generate required fields:
+  - `id`: Unique identifier derived from file path
+  - `title`: Generated from filename if not present
+  - `sidebar_position`: Auto-incremented position in sidebar
+- Ensure compatibility with Docusaurus v3's frontMatter parsing
+
+### Output Requirements
+- Valid YAML front matter for every markdown file
+- Sync sidebar configuration with valid doc IDs
+- No manual user edits should be required post-processing
+- Deterministic execution with consistent results
+
+## Implementation
+
+### File Scanning
+1. Recursively scan all files in `/docs` directory
+2. Filter files by `.md` and `.mdx` extensions
+3. For each file, check for valid front matter
+
+### Front Matter Validation
+1. Check if file starts with `---`
+2. Locate the closing `---` delimiter
+3. Attempt to parse the enclosed YAML content
+4. Validate required fields (`id`, `title`)
+
+### Front Matter Repair
+1. If front matter is invalid or missing:
+   a. Remove existing (broken) front matter
+   b. Extract filename and directory for generating values
+   c. Generate proper `id` (alphanumeric, hyphens, underscores only)
+   d. Generate proper `title` (human-friendly from filename)
+   e. Generate or update `sidebar_position` based on file order
+   f. Ensure all special characters are properly handled
+2. Write new front matter with proper YAML syntax
+
+### ASCII and Special Character Handling
+1. Convert all text to ASCII-compatible representation
+2. Replace special characters with safe alternatives:
+   - `+` → `plus`
+   - `:` → space or `-` depending on context
+   - `&` → `and`
+   - `?` → remove or replace with "question"
+   - `{` `}` → remove
+   - `[` `]` → remove
+3. Quote any values that might be problematic for YAML parsing
+
+### Sidebar Synchronization
+1. After processing all files, update sidebar configuration
+2. Ensure all document IDs in sidebar exist in actual files
+3. Remove orphaned references to missing or renamed documents
+
+## Validation Steps
+1. After processing each file, verify the YAML is valid
+2. Test parsing the front matter using js-yaml
+3. Verify Docusaurus can properly extract the frontMatter property
+4. Run Docusaurus build process to ensure no errors
+
+## Expected Outcomes
+- Zero "Cannot destructure property 'frontMatter'" errors
+- Fully functional Docusaurus build
+- Consistent and valid YAML front matter across all docs
+- Properly ordered sidebar navigation
+- All links and references remain valid

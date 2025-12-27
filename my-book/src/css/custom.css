@@ -1,0 +1,29 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/* You can override the default Docusaurus styling here. */
+:root {
+  --ifm-color-primary: #1a365d; /* Deep navy blue for academic theme */
+  --ifm-color-primary-dark: #132943; /* Darker variant */
+  --ifm-color-primary-darker: #0f2036; /* Even darker variant */
+  --ifm-color-primary-darkest: #0a1524; /* Darkest variant */
+  --ifm-color-primary-light: #2a4a70; /* Lighter variant */
+  --ifm-color-primary-lighter: #3a5f88; /* Even lighter variant */
+  --ifm-color-primary-lightest: #4d739f; /* Lightest variant */
+  --ifm-code-font-size: 95%;
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+html[data-theme='dark'] .docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.3);
+}
