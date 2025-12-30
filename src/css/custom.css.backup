@@ -1,0 +1,212 @@
+/**
+ * Custom CSS for Physical AI & Humanoid Robotics Textbook
+ * Academic textbook styling for a professional learning experience
+ */
+
+:root {
+  --ifm-color-primary: #2c5282; /* Deep blue for academic theme */
+  --ifm-color-primary-dark: #1a3c63; /* Darker variant */
+  --ifm-color-primary-darker: #142d4c; /* Even darker variant */
+  --ifm-color-primary-darkest: #0f2036; /* Darkest variant */
+  --ifm-color-primary-light: #3a689c; /* Lighter variant */
+  --ifm-color-primary-lighter: #5d87b6; /* Even lighter variant */
+  --ifm-color-primary-lightest: #8da6c9; /* Lightest variant */
+  --ifm-code-font-size: 90%;
+  --ifm-font-family-base: 'Georgia', 'Times New Roman', serif; /* Serif font for academic feel */
+  --ifm-h1-font-size: 2.5rem;
+  --ifm-h2-font-size: 1.75rem;
+  --ifm-h3-font-size: 1.5rem;
+  --ifm-h4-font-size: 1.25rem;
+  --ifm-line-height-base: 1.7;
+  --ifm-pre-padding: 1.5rem;
+  --ifm-spacing-horizontal: 1.5rem;
+  --ifm-container-width: 1200px;
+  --ifm-container-width-xl: 1400px;
+}
+
+html[data-theme='dark'] {
+  --ifm-color-primary: #4a90e2; /* Lighter blue for dark mode */
+  --ifm-color-primary-dark: #2a6fd4;
+  --ifm-color-primary-darker: #225aa8;
+  --ifm-color-primary-darkest: #1a467c;
+  --ifm-color-primary-light: #6bb3f0;
+  --ifm-color-primary-lighter: #8ac5f5;
+  --ifm-color-primary-lightest: #a9d8fa;
+}
+
+/* Academic textbook styling */
+.hero--primary {
+  background: linear-gradient(135deg, #2c5282 0%, #1a3c63 100%);
+  color: white;
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+  border-left: 3px solid var(--ifm-color-primary);
+}
+
+html[data-theme='dark'] .docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Improved typography for readability */
+.markdown {
+  font-size: 1.1rem;
+  line-height: var(--ifm-line-height-base);
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-family: var(--ifm-font-family-base);
+}
+
+.markdown h1 {
+  font-size: var(--ifm-h1-font-size);
+}
+
+.markdown h2 {
+  font-size: var(--ifm-h2-font-size);
+}
+
+.markdown h3 {
+  font-size: var(--ifm-h3-font-size);
+}
+
+/* Enhanced code block styling */
+pre {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Card-like styling for feature boxes */
+.featureSvg {
+  transition: transform 0.3s ease;
+}
+
+.featureSvg:hover {
+  transform: scale(1.05);
+}
+
+/* Improved table styling */
+.markdown table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.markdown table th,
+.markdown table td {
+  padding: 0.75rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  text-align: left;
+}
+
+.markdown table th {
+  background-color: var(--ifm-color-emphasis-100);
+  font-weight: 600;
+}
+
+/* Better blockquote styling */
+.markdown blockquote {
+  border-left: 4px solid var(--ifm-color-primary);
+  background-color: var(--ifm-color-emphasis-100);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+}
+
+/* Enhanced list styling */
+.markdown ul,
+.markdown ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.markdown li {
+  margin-bottom: 0.5rem;
+}
+
+/* Improved navigation sidebar */
+.menu {
+  font-size: 0.95rem;
+}
+
+.menu__list-item {
+  margin-bottom: 0.25rem;
+}
+
+.menu__link {
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+}
+
+.menu__link--active {
+  background-color: var(--ifm-color-emphasis-200);
+  font-weight: 600;
+}
+
+/* Footer styling */
+.footer--dark {
+  background-color: #1a3c63;
+}
+
+/* Button styling */
+.button--secondary {
+  background-color: white;
+  color: var(--ifm-color-primary);
+  border: 2px solid var(--ifm-color-primary);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.button--secondary:hover {
+  background-color: var(--ifm-color-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom styling for academic content */
+.textbook-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+/* Improved dark mode support */
+html[data-theme='dark'] {
+  --ifm-background-color: #121826;
+  --ifm-background-surface-color: #1a202c;
+  --ifm-color-content: #e2e8f0;
+  --ifm-color-content-secondary: #cbd5e0;
+}
+
+html[data-theme='dark'] .textbook-content {
+  background-color: var(--ifm-background-surface-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom styling for code blocks */
+code {
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+pre code {
+  border-radius: 8px;
+  padding: 1rem;
+}

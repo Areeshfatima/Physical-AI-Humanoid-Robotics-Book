@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Production builds
+/build/
+/dist/
+
+# Runtime data
+.pnp
+.pnp.js
+
+# IDEs and editors
+/.idea
+/*.swp
+/*.swo
+*~
+.vscode/
+
+# Environment variables
+.env*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Docusaurus
+.cache/
+.generated/
+.docusaurus/

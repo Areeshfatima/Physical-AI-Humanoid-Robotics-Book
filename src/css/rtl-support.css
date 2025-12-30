@@ -1,0 +1,111 @@
+/* Right-to-left text support for multi-language functionality */
+
+/* Apply RTL layout when language is set to RTL */
+[dir="rtl"] {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] .navbar {
+  text-align: right;
+}
+
+[dir="rtl"] .navbar__inner {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .navbar__items {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .navbar__toggle {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+[dir="rtl"] .navbar__logo {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+[dir="rtl"] .menu {
+  text-align: right;
+}
+
+[dir="rtl"] .menu__list {
+  text-align: right;
+}
+
+[dir="rtl"] .menu__link {
+  text-align: right;
+  padding-right: 1rem;
+  padding-left: 2rem;
+}
+
+[dir="rtl"] .pagination-nav__label {
+  text-align: right;
+}
+
+[dir="rtl"] .pagination-nav__link {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .pagination-nav__sublabel {
+  direction: rtl;
+}
+
+[dir="rtl"] .theme-doc-sidebar-menu {
+  text-align: right;
+}
+
+[dir="rtl"] .theme-doc-sidebar-item-link {
+  padding-right: 1rem;
+  padding-left: 1.5rem;
+}
+
+[dir="rtl"] .table-of-contents {
+  text-align: right;
+}
+
+[dir="rtl"] .hero__title {
+  text-align: right;
+}
+
+[dir="rtl"] .hero__subtitle {
+  text-align: right;
+}
+
+[dir="rtl"] .footer__title {
+  text-align: right;
+}
+
+[dir="rtl"] .footer__items {
+  text-align: right;
+}
+
+[dir="rtl"] .container {
+  direction: rtl;
+}
+
+[dir="rtl"] .row {
+  flex-direction: row-reverse;
+}
+
+/* RTL-specific typography adjustments */
+[dir="rtl"] .markdown h1,
+[dir="rtl"] .markdown h2,
+[dir="rtl"] .markdown h3,
+[dir="rtl"] .markdown h4,
+[dir="rtl"] .markdown h5,
+[dir="rtl"] .markdown h6 {
+  text-align: right;
+}
+
+[dir="rtl"] .markdown blockquote {
+  border-right: 4px solid var(--ifm-color-primary);
+  border-left: none;
+  padding-right: 16px;
+  padding-left: 0;
+  margin-right: 0;
+  margin-left: 0;
+}
