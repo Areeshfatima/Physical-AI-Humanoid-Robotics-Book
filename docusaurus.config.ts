@@ -9,15 +9,14 @@ const config: Config = {
   tagline: 'Comprehensive educational resource for Physical AI & Humanoid Robotics',
   favicon: 'img/book-logo.svg',
 
-  // Set the production url of your site here
-  url: 'https://areeshfatima.github.io',
+  // Set the production url of your site here (Vercel deployment)
+  url: 'https://physical-ai-humanoid-robotics-book.vercel.app',
   // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub Pages, this is usually /<project-name>/
-  baseUrl: '/Physical-AI-Humanoid-Robotics-Book/',
+  // For Vercel deployment, this is usually "/"
+  baseUrl: '/',
 
-  // GitHub pages deployment config.
-  organizationName: 'Areeshfatima', // Usually your GitHub org/user name.
-  projectName: 'Physical-AI-Humanoid-Robotics-Book', // Usually your repo name.
+  // Vercel deployment config
+  trailingSlash: false, // Consistent trailing slash behavior for Vercel
 
   onBrokenLinks: 'warn',
 
