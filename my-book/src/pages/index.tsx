@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
@@ -13,16 +12,22 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Start Learning - Physical AI & Robotics 🤖
-          </Link>
+        <div className={styles.textbookCover}>
+          <div className={styles.coverImage}>
+            <div className={styles.robotIllustration}></div>
+          </div>
+          <div className={styles.coverText}>
+            <Heading as="h1" className="hero__title textbook-title">
+              {siteConfig.title}
+            </Heading>
+            <p className="hero__subtitle textbook-subtitle">{siteConfig.tagline}</p>
+            <p className="textbook-author">by Areesh Fatima</p>
+            <div className={styles.buttons}>
+              <Link className="button button--secondary button--lg textbook-button" to="/docs/introduction">
+                Read Textbook
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -33,12 +38,9 @@ export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Welcome to ${siteConfig.title}`}
-      description="Comprehensive educational resource for Physical AI & Humanoid Robotics - Your complete textbook on the intersection of artificial intelligence and robotics">
+      title={`Welcome`}
+      description="Physical AI & Humanoid Robotics: A Technical Textbook">
       <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
     </Layout>
   );
 }

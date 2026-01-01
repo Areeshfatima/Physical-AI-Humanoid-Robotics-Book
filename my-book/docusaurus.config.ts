@@ -44,8 +44,9 @@ const config: Config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'undefined',
+          editUrl: undefined,
+          showLastUpdateTime: false,
+          showLastUpdateAuthor: false,
         },
         blog: false, // Optional: disable the blog plugin
         theme: {
@@ -86,7 +87,7 @@ const config: Config = {
           items: [
             {
               label: 'Textbook',
-              to: '/docs/intro',
+              to: '/docs/introduction',
             },
           ],
         },

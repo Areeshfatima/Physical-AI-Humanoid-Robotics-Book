@@ -1,109 +1,85 @@
-/* Academic-themed styling for the textbook */
+/* Academic Theme Styles for Physical AI & Humanoid Robotics Textbook */
 
-/* Academic Color Scheme */
+/* Academic color palette */
 :root {
-  /* Primary colors for academic theme */
-  --ifm-color-primary: #1a365d; /* Deep navy blue for headers and accents */
-  --ifm-color-primary-dark: #132943; /* Darker variant */
-  --ifm-color-primary-darker: #0f2036; /* Even darker variant */
-  --ifm-color-primary-darkest: #0a1524; /* Darkest variant */
-  --ifm-color-primary-light: #2a4a70; /* Lighter variant */
-  --ifm-color-primary-lighter: #3a5f88; /* Even lighter variant */
-  --ifm-color-primary-lightest: #4d739f; /* Lightest variant */
-
-  /* Backgrounds */
-  --ifm-background-color: #ffffff; /* Clean white background */
-  --ifm-background-surface-color: #f8f9fa; /* Light gray for surfaces */
-  --ifm-background-surface-color-dark: #e9ecef; /* Darker surface variant */
-
-  /* Text colors */
-  --ifm-font-color-base: #212529; /* Dark gray for body text (for eye comfort) */
-  --ifm-font-color-base-inverse: #ffffff; /* White for light backgrounds */
-  --ifm-heading-color: #1a365d; /* Match primary color for consistency */
-
-  /* Borders and separators */
-  --ifm-border-color: #ced4da; /* Neutral gray for borders */
-  --ifm-toc-border-color: #e9ecef; /* Table of contents border */
-  
-  /* Code block styling */
-  --ifm-code-background: #f8f9fa; /* Light background for code */
-  --ifm-code-color: #e83e8c; /* Custom code text color */
-  --docusaurus-highlighted-code-line-bg: #ffeaa7; /* Highlighted lines */
-  
-  /* Links */
-  --ifm-link-color: #0d6efd; /* Bootstrap blue for links */
-  --ifm-link-hover-color: #0b5ed7; /* Hover state */
+  --ifm-color-primary: #1e3a8a; /* Deep blue for academic feel */
+  --ifm-color-primary-dark: #1e3a8a;
+  --ifm-color-primary-darker: #1e3a8a;
+  --ifm-color-primary-darkest: #1e3a8a;
+  --ifm-color-primary-light: #3b82f6;
+  --ifm-color-primary-lighter: #60a5fa;
+  --ifm-color-primary-lightest: #93c5fd;
 }
 
-/* Dark mode academic palette */
-html[data-theme='dark'] {
-  --ifm-color-primary: #7ca5d3; /* Lighter blue for dark mode */
-  --ifm-color-primary-dark: #5a89c0; /* Darker variant */
-  --ifm-color-primary-darker: #4a79b5; /* Even darker variant */
-  --ifm-color-primary-darkest: #3a6095; /* Darkest variant */
-  --ifm-color-primary-light: #9ec0e1; /* Lighter variant */
-  --ifm-color-primary-lighter: #b7d2e8; /* Even lighter variant */
-  --ifm-color-primary-lightest: #d0e4f2; /* Lightest variant */
-
-  --ifm-background-color: #121212; /* Dark background */
-  --ifm-background-surface-color: #1e1e1e; /* Surface area */
-  --ifm-font-color-base: #e1e1e1; /* Light text */
-  --ifm-heading-color: #d0e4f2; /* Light heading */
-  --ifm-border-color: #333333; /* Darker borders */
-  --ifm-code-background: #2d2d2d; /* Dark code background */
-}
-
-/* Academic Typography - optimized for reading */
+/* Academic Typography */
 html {
-  /* Base font size for better readability */
-  font-size: 16px;
+  font-family: 'Georgia', 'Times New Roman', serif;
 }
 
-/* Body text styling for extended reading */
-.markdown,
-article,
-.main-wrapper {
-  font-family: 'Georgia', 'Times New Roman', serif; /* Serif for body text */
-  line-height: 1.6;
-  font-size: 1.05rem;
-  color: var(--ifm-font-color-base);
-}
-
-/* Headers maintain a clean academic hierarchy */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; /* Sans-serif for headers */
-  color: var(--ifm-heading-color);
+  font-family: 'Arial', 'Helvetica', sans-serif;
   font-weight: 600;
 }
 
-/* Code typography */
-code {
-  font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', monospace;
-  font-size: 0.9em;
-  background-color: var(--ifm-code-background);
-  color: var(--ifm-code-color);
-  padding: 2px 6px;
+/* Academic styling for main content */
+.main-wrapper {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* Academic sidebar styling */
+.menu {
+  font-size: 0.9rem;
+}
+
+/* Academic-themed buttons */
+.button {
   border-radius: 4px;
+  font-weight: 500;
 }
 
-/* Blockquote styling for academic citations */
-blockquote {
-  border-left: 4px solid var(--ifm-color-primary);
-  background-color: rgba(26, 54, 93, 0.05); /* Light blue tint */
-  padding: 16px 24px;
-  margin: 24px 0;
-  font-style: italic;
-  color: var(--ifm-font-color-base);
+/* Academic code block styling */
+.prism-code {
+  border-radius: 4px;
+  font-size: 0.9rem;
 }
 
-/* Table styling for academic content */
-table {
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+/* Academic table styling */
+.table {
+  border: 1px solid var(--ifm-color-emphasis-300);
 }
 
-th, td {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--ifm-border-color);
+.table th,
+.table td {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  padding: 0.5rem 1rem;
+}
+
+/* Academic-themed footer */
+.footer {
+  background-color: #1e3a8a;
+  color: white;
+}
+
+/* Academic-themed navigation */
+.navbar {
+  background-color: #1e40af;
+  color: white;
+}
+
+.navbar__brand {
+  color: white;
+}
+
+.navbar__link {
+  color: white;
+}
+
+.navbar__link--active {
+  color: #eff6ff;
+}
+
+/* Academic-themed hero banner */
+.navbar__logo {
+  height: 2.5rem;
 }

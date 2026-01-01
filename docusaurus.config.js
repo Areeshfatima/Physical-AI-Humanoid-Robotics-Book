@@ -11,7 +11,7 @@ const config = {
   url: 'https://physical-ai-humanoid-robotics.github.io',
   // Set the /<base>/ pathname under which your site is served
   // For GitHub Pages, this is usually /<project-name>/
-  baseUrl: '/physical-ai-humanoid-robotics/',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   organizationName: 'physical-ai-humanoid-robotics', // Usually your GitHub org/user name.
@@ -25,6 +25,9 @@ const config = {
       onBrokenMarkdownImages: 'warn',
     },
   },
+
+  // Trailing slash handling
+  trailingSlash: false,
 
   // Performance and image loading optimization
   themes: [
@@ -67,6 +70,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Edit this page links removed for academic textbook
+          editUrl: null, // Disable edit links completely
         },
         blog: false, // Optional: disable the blog plugin
         theme: {
@@ -88,8 +92,8 @@ const config = {
         title: 'Physical AI & Humanoid Robotics',
         logo: {
           alt: 'Physical AI & Humanoid Robotics Textbook Logo',
-          src: 'img/book-logo.svg', // Updated to book-themed logo
-          srcDark: 'img/book-logo-dark.svg', // Added dark mode logo
+          src: 'img/textbook-logo.svg', // Updated to academic-themed logo
+          srcDark: 'img/textbook-logo-dark.svg', // Added dark mode logo
         },
         items: [
           {
@@ -131,7 +135,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Physical AI & Humanoid Robotics Textbook. All rights reserved.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Physical AI & Humanoid Robotics Textbook. An Academic Resource for Robotics Education.`,
       },
       prism: {
         theme: require('prism-react-renderer').themes.github,

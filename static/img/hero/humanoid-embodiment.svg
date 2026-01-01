@@ -1,0 +1,126 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { 
+      font-family: Arial, sans-serif; 
+      font-size: 18px; 
+      font-weight: bold; 
+      fill: #1f2937; 
+    }
+    .subtitle { 
+      font-family: Arial, sans-serif; 
+      font-size: 14px; 
+      fill: #4b5563; 
+    }
+    .head { 
+      fill: #e5e7eb; 
+      stroke: #4b5563; 
+      stroke-width: 2;
+    }
+    .torso { 
+      fill: #e5e7eb; 
+      stroke: #4b5563; 
+      stroke-width: 2;
+    }
+    .limb { 
+      fill: #e5e7eb; 
+      stroke: #4b5563; 
+      stroke-width: 2;
+    }
+    .sensor { 
+      fill: #3b82f6; 
+      stroke: #1d4ed8; 
+      stroke-width: 1;
+    }
+    .actuator { 
+      fill: #ef4444; 
+      stroke: #dc2626; 
+      stroke-width: 1;
+    }
+    .proprio { 
+      fill: #f59e0b; 
+      stroke: #d97706; 
+      stroke-width: 1;
+    }
+    .connection {
+      stroke: #6b7280;
+      stroke-width: 2;
+      marker-end: url(#arrowhead);
+    }
+    .sensor-label {
+      font-family: Arial, sans-serif; 
+      font-size: 12px; 
+      fill: #3b82f6; 
+      font-weight: bold;
+    }
+    .actuator-label {
+      font-family: Arial, sans-serif; 
+      font-size: 12px; 
+      fill: #ef4444; 
+      font-weight: bold;
+    }
+    .proprio-label {
+      font-family: Arial, sans-serif; 
+      font-size: 12px; 
+      fill: #f59e0b; 
+      font-weight: bold;
+    }
+  </style>
+  
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+      refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280" />
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="white" />
+  
+  <!-- Title -->
+  <text x="300" y="30" class="title" text-anchor="middle">Humanoid Embodiment & Sensors</text>
+  
+  <!-- Humanoid Body -->
+  <!-- Head -->
+  <circle cx="300" cy="80" r="35" class="head" />
+  
+  <!-- Torso -->
+  <rect x="265" y="115" width="70" height="120" class="torso" rx="10" ry="10" />
+  
+  <!-- Arms -->
+  <line x1="265" y1="130" x2="200" y2="180" stroke="#4b5563" stroke-width="20" stroke-linecap="round" class="limb" />
+  <line x1="335" y1="130" x2="400" y2="180" stroke="#4b5563" stroke-width="20" stroke-linecap="round" class="limb" />
+  
+  <!-- Legs -->
+  <line x1="280" y1="235" x2="260" y2="320" stroke="#4b5563" stroke-width="20" stroke-linecap="round" class="limb" />
+  <line x1="320" y1="235" x2="340" y2="320" stroke="#4b5563" stroke-width="20" stroke-linecap="round" class="limb" />
+  
+  <!-- Vision Sensors -->
+  <circle cx="285" cy="70" r="5" class="sensor" />
+  <circle cx="315" cy="70" r="5" class="sensor" />
+  <text x="285" y="50" class="sensor-label" text-anchor="middle">Stereo</text>
+  <text x="285" y="65" class="sensor-label" text-anchor="middle">Cameras</text>
+  
+  <!-- Force/Torque Sensors -->
+  <circle cx="190" cy="180" r="6" class="sensor" />
+  <circle cx="410" cy="180" r="6" class="sensor" />
+  <text x="190" y="160" class="sensor-label" text-anchor="middle">Force/Torque</text>
+  <text x="190" y="175" class="sensor-label" text-anchor="middle">Sensors</text>
+  
+  <!-- Proprioception Sensors -->
+  <circle cx="300" cy="150" r="6" class="proprio" />
+  <circle cx="270" cy="200" r="6" class="proprio" />
+  <circle cx="330" cy="200" r="6" class="proprio" />
+  <text x="300" y="140" class="proprio-label" text-anchor="middle">Joint Angle</text>
+  <text x="300" y="155" class="proprio-label" text-anchor="middle">Encoders</text>
+  
+  <!-- Actuators -->
+  <circle cx="250" cy="320" r="6" class="actuator" />
+  <circle cx="350" cy="320" r="6" class="actuator" />
+  <text x="250" y="340" class="actuator-label" text-anchor="middle">Hip/Knee</text>
+  <text x="250" y="355" class="actuator-label" text-anchor="middle">Servos</text>
+  
+  <!-- Annotation -->
+  <text x="300" y="380" class="subtitle" text-anchor="middle">
+    Humanoid embodiment with distributed sensing and actuation systems
+  </text>
+</svg>

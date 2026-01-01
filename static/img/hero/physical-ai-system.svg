@@ -1,0 +1,126 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { 
+      font-family: Arial, sans-serif; 
+      font-size: 18px; 
+      font-weight: bold; 
+      fill: #1f2937; 
+    }
+    .subtitle { 
+      font-family: Arial, sans-serif; 
+      font-size: 14px; 
+      fill: #4b5563; 
+    }
+    .sensor { 
+      fill: #3b82f6; 
+      stroke: #1d4ed8; 
+      stroke-width: 1;
+    }
+    .perception { 
+      fill: #10b981; 
+      stroke: #047857; 
+      stroke-width: 1;
+    }
+    .world-model { 
+      fill: #8b5cf6; 
+      stroke: #6d28d9; 
+      stroke-width: 1;
+    }
+    .policy { 
+      fill: #f59e0b; 
+      stroke: #d97706; 
+      stroke-width: 1;
+    }
+    .actuator { 
+      fill: #ef4444; 
+      stroke: #dc2626; 
+      stroke-width: 1;
+    }
+    .connection {
+      stroke: #6b7280;
+      stroke-width: 2;
+      marker-end: url(#arrowhead);
+    }
+    .block {
+      fill: #e5e7eb;
+      stroke: #9ca3af;
+      stroke-width: 2;
+      rx: 10;
+      ry: 10;
+    }
+    .sensor-label {
+      font-family: Arial, sans-serif; 
+      font-size: 12px; 
+      fill: #3b82f6; 
+      font-weight: bold;
+    }
+  </style>
+  
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+      refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280" />
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="white" />
+  
+  <!-- Title -->
+  <text x="300" y="30" class="title" text-anchor="middle">Physical AI Architecture</text>
+  
+  <!-- Sensors Block -->
+  <g transform="translate(50, 80)">
+    <rect class="block" width="120" height="80" />
+    <text x="60" y="30" class="subtitle" text-anchor="middle">Sensors</text>
+    <circle cx="30" cy="50" r="8" class="sensor" />
+    <circle cx="60" cy="50" r="8" class="sensor" />
+    <circle cx="90" cy="50" r="8" class="sensor" />
+    <text x="60" y="70" class="subtitle" text-anchor="middle">Cameras, LiDAR</text>
+  </g>
+  
+  <!-- Perception Block -->
+  <g transform="translate(200, 80)">
+    <rect class="block" width="120" height="80" />
+    <text x="60" y="30" class="subtitle" text-anchor="middle">Perception</text>
+    <rect x="30" y="40" width="60" height="20" class="perception" rx="5" ry="5" />
+    <text x="60" y="70" class="subtitle" text-anchor="middle">Object Detection</text>
+  </g>
+  
+  <!-- World Model Block -->
+  <g transform="translate(350, 80)">
+    <rect class="block" width="120" height="80" />
+    <text x="60" y="30" class="subtitle" text-anchor="middle">World Model</text>
+    <rect x="20" y="40" width="80" height="20" class="world-model" rx="5" ry="5" />
+    <text x="60" y="70" class="subtitle" text-anchor="middle">Environment Map</text>
+  </g>
+  
+  <!-- Policy Block -->
+  <g transform="translate(125, 250)">
+    <rect class="block" width="120" height="80" />
+    <text x="60" y="30" class="subtitle" text-anchor="middle">Policy</text>
+    <rect x="30" y="40" width="60" height="20" class="policy" rx="5" ry="5" />
+    <text x="60" y="70" class="subtitle" text-anchor="middle">Decision Making</text>
+  </g>
+  
+  <!-- Actuators Block -->
+  <g transform="translate(325, 250)">
+    <rect class="block" width="120" height="80" />
+    <text x="60" y="30" class="subtitle" text-anchor="middle">Actuators</text>
+    <rect x="30" y="40" width="60" height="20" class="actuator" rx="5" ry="5" />
+    <text x="60" y="70" class="subtitle" text-anchor="middle">Motors, Servos</text>
+  </g>
+  
+  <!-- Connections -->
+  <line x1="170" y1="120" x2="200" y2="120" class="connection" /> <!-- Sensors to Perception -->
+  <line x1="320" y1="120" x2="350" y2="120" class="connection" /> <!-- Perception to World Model -->
+  <line x1="110" y1="160" x2="185" y2="250" class="connection" /> <!-- Sensors to Policy -->
+  <line x1="260" y1="160" x2="325" y2="250" class="connection" /> <!-- Perception to Actuators -->
+  <line x1="325" y1="120" x2="385" y2="160" class="connection" /> <!-- World Model to Actuators -->
+  <line x1="185" y1="290" x2="265" y2="290" class="connection" /> <!-- Policy to Actuators -->
+  
+  <!-- Annotation -->
+  <text x="300" y="370" class="subtitle" text-anchor="middle">
+    Perception-action loop with environmental modeling
+  </text>
+</svg>

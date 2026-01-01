@@ -1,8 +1,3 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
-
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
@@ -16,8 +11,117 @@
   }
 }
 
-.buttons {
+.textbookCover {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.coverImage {
+  flex: 1;
+  min-width: 300px;
+  height: 400px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.robotIllustration {
+  width: 200px;
+  height: 200px;
+  background: 
+    radial-gradient(circle at 30% 30%, #3b82f6 10px, transparent 11px),
+    radial-gradient(circle at 70% 30%, #3b82f6 10px, transparent 11px),
+    linear-gradient(to bottom, #1e40af 30px, transparent 30px),
+    linear-gradient(to right, #1e40af 30px, transparent 30px),
+    linear-gradient(45deg, #60a5fa 25%, transparent 25%),
+    linear-gradient(-45deg, #60a5fa 25%, transparent 25%);
+  background-size: 200px 200px;
+  position: relative;
+}
+
+.robotIllustration::before {
+  content: "";
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 80px;
+  background: #3b82f6;
+  border-radius: 40px 40px 10px 10px;
+}
+
+.coverText {
+  flex: 1;
+  text-align: left;
+  padding: 2rem;
+}
+
+.textbook-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #1e3a8a;
+  line-height: 1.3;
+}
+
+.textbook-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #374151;
+}
+
+.textbook-author {
+  font-size: 1.1rem;
+  font-style: italic;
+  margin-bottom: 2rem;
+  color: #4b5563;
+}
+
+.textbook-button {
+  background-color: #1e40af !important;
+  border-color: #1e40af !important;
+  font-size: 1.1rem;
+  padding: 0.8rem 1.5rem;
+}
+
+.textbook-button:hover {
+  background-color: #1e3a8a !important;
+  border-color: #1e3a8a !important;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@media screen and (max-width: 996px) {
+  .textbookCover {
+    flex-direction: column;
+  }
+  
+  .coverImage {
+    min-width: auto;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .coverText {
+    text-align: center;
+  }
+  
+  .buttons {
+    justify-content: center;
+  }
 }

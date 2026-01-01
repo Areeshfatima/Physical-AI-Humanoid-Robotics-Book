@@ -13,33 +13,60 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <div className="row">
-          <div className="col col--6">
-            <div className="text--center padding-vert--md">
-              <Heading as="h1" className="hero__title">
-                {siteConfig.title}
-              </Heading>
-              <p className="hero__subtitle">{siteConfig.tagline}</p>
-              <div className={styles.buttons}>
-                <Link
-                  className="button button--secondary button--lg"
-                  to="/docs/intro">
-                  Begin Your Learning Journey 🤖
-                </Link>
-              </div>
+        <div className="textbook-cover">
+          <div className={styles.textbookContent}>
+            <Heading as="h1" className={styles.heroTitle}>
+              Physical AI & Humanoid Robotics
+            </Heading>
+            <p className={styles.heroSubtitle}>An Academic Textbook</p>
+
+            {/* Academic Abstract-style description */}
+            <div className={styles.techDescription}>
+              <p>
+                Embodied intelligence systems that bridge the gap between artificial intelligence and physical interaction. This textbook explores the foundational principles, methodologies, and applications of humanoid robotics.
+              </p>
+
+              <p>
+                <strong>Key Topics Include:</strong>
+              </p>
+              <ul>
+                <li>Perception-action loops with multimodal sensor fusion</li>
+                <li>Learning-based control strategies for dynamic environments</li>
+                <li>Simulation-to-real transfer techniques and digital twin methodologies</li>
+                <li>Human-scale robotic cognition and interaction paradigms</li>
+              </ul>
+            </div>
+
+            <div className={styles.buttons}>
+              <Link
+                className="button button--secondary button--lg"
+                to="/docs/introduction">
+                Read Textbook
+              </Link>
             </div>
           </div>
-          <div className="col col--6 text--center padding-vert--md">
-            <div className={styles.heroImageContainer}>
+
+          <div className={styles.heroGraphics}>
+            {/* Rotating/stacked hero diagrams */}
+            <div className={styles.heroGraphic}>
               <img
-                src="/img/ai-brain-placeholder.svg"
-                alt="Physical AI and Humanoid Robotics Concept"
-                className={styles.heroImage}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.onerror = null; // Prevent infinite loop
-                  target.src = "/img/robot-placeholder.svg";
-                }}
+                src="/img/hero/physical-ai-system.svg"
+                alt="Physical AI Architecture"
+                className={styles.heroImg}
+              />
+            </div>
+            <div className={styles.heroGraphic}>
+              <img
+                src="/img/hero/humanoid-embodiment.svg"
+                alt="Humanoid Embodiment & Sensors"
+                className={styles.heroImg}
+              />
+            </div>
+            <div className={styles.heroGraphic}>
+              <img
+                src="/img/hero/simulation-loop.svg"
+                alt="Simulation to Reality Loop"
+                className={styles.heroImg}
               />
             </div>
           </div>
@@ -54,74 +81,9 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={`Physical AI & Humanoid Robotics Textbook`}
-      description="Comprehensive educational resource for Physical AI & Humanoid Robotics - Your complete textbook on the intersection of artificial intelligence and robotics">
+      description="Comprehensive academic textbook for Physical AI & Humanoid Robotics - Advanced educational resource on embodied intelligence and humanoid robotics">
       <HomepageHeader />
       <main>
-        <section className={styles.textbookIntro}>
-          <div className="container padding-vert--lg">
-            <div className="row">
-              <div className="col col--6 col--offset-3 padding-horiz--md">
-                <div className="textbook-content">
-                  <Heading as="h2" className="text--center padding-bottom--md">
-                    About This Textbook
-                  </Heading>
-                  <p>
-                    Welcome to the comprehensive textbook on <strong>Physical AI & Humanoid Robotics</strong>.
-                    This educational resource provides an in-depth exploration of the intersection between artificial
-                    intelligence and robotics, with a specific focus on humanoid robot systems.
-                  </p>
-                  <p>
-                    Through this course, you will learn about:
-                  </p>
-                  <ul>
-                    <li>The theoretical foundations of physical AI</li>
-                    <li>Core robotics concepts including perception, planning, and control</li>
-                    <li>Advanced topics in humanoid robot design and functionality</li>
-                    <li>Real-world applications and case studies</li>
-                    <li>Integration of vision-language-action models in robotic systems</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className={styles.learningPath}>
-          <div className="container padding-vert--lg">
-            <div className="row">
-              <div className="col col--10 col--offset-1">
-                <Heading as="h2" className="text--center padding-bottom--lg">
-                  Structured Learning Path
-                </Heading>
-                <div className="row">
-                  <div className="col col--3">
-                    <div className="textbook-content text--center">
-                      <h3>Module 1</h3>
-                      <p>ROS2 Fundamentals</p>
-                    </div>
-                  </div>
-                  <div className="col col--3">
-                    <div className="textbook-content text--center">
-                      <h3>Module 2</h3>
-                      <p>Digital Twin & Simulation</p>
-                    </div>
-                  </div>
-                  <div className="col col--3">
-                    <div className="textbook-content text--center">
-                      <h3>Module 3</h3>
-                      <p>Isaac Sim & Navigation</p>
-                    </div>
-                  </div>
-                  <div className="col col--3">
-                    <div className="textbook-content text--center">
-                      <h3>Module 4</h3>
-                      <p>Vision-Language-Action Systems</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
         <HomepageFeatures />
       </main>
     </Layout>

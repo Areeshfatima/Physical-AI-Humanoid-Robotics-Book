@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100">
+  <style>
+    .title { 
+      font-family: Arial, sans-serif; 
+      font-size: 24px; 
+      font-weight: bold; 
+      fill: #1e3a8a; 
+    }
+    .subtitle { 
+      font-family: Arial, sans-serif; 
+      font-size: 16px; 
+      fill: #4b5563; 
+    }
+    .book-outline {
+      fill: none;
+      stroke: #1e40af;
+      stroke-width: 2;
+    }
+    .robot-icon {
+      fill: #3b82f6;
+    }
+  </style>
+  <rect x="20" y="20" width="80" height="60" class="book-outline" />
+  <text x="120" y="45" class="title">Physical AI</text>
+  <text x="120" y="70" class="title">&amp; Humanoid Robotics</text>
+  <text x="120" y="85" class="subtitle">An Academic Textbook</text>
+  
+  <!-- Robot icon -->
+  <g transform="translate(45, 35)">
+    <circle cx="0" cy="-10" r="8" class="robot-icon" />
+    <rect x="-10" y="0" width="20" height="25" class="robot-icon" />
+    <line x1="-15" y1="5" x2="-25" y2="15" stroke="#3b82f6" stroke-width="3" />
+    <line x1="15" y1="5" x2="25" y2="15" stroke="#3b82f6" stroke-width="3" />
+    <line x1="-8" y1="30" x2="-15" y2="50" stroke="#3b82f6" stroke-width="3" />
+    <line x1="8" y1="30" x2="15" y2="50" stroke="#3b82f6" stroke-width="3" />
+  </g>
+</svg>

@@ -1,0 +1,146 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { 
+      font-family: Arial, sans-serif; 
+      font-size: 18px; 
+      font-weight: bold; 
+      fill: #1f2937; 
+    }
+    .subtitle { 
+      font-family: Arial, sans-serif; 
+      font-size: 14px; 
+      fill: #4b5563; 
+    }
+    .digital-twin { 
+      fill: #c7d2fe; 
+      stroke: #6366f1; 
+      stroke-width: 2;
+    }
+    .simulator { 
+      fill: #bfdbfe; 
+      stroke: #3b82f6; 
+      stroke-width: 2;
+    }
+    .control { 
+      fill: #bfdbfe; 
+      stroke: #3b82f6; 
+      stroke-width: 2;
+    }
+    .robot { 
+      fill: #fecaca; 
+      stroke: #f87171; 
+      stroke-width: 2;
+    }
+    .reality { 
+      fill: #fee2e2; 
+      stroke: #ef4444; 
+      stroke-width: 2;
+    }
+    .connection {
+      stroke: #6b7280;
+      stroke-width: 2;
+      marker-end: url(#arrowhead);
+    }
+    .flow-label {
+      font-family: Arial, sans-serif; 
+      font-size: 12px; 
+      fill: #4b5563; 
+      font-weight: bold;
+    }
+    .block {
+      fill: #e5e7eb;
+      stroke: #9ca3af;
+      stroke-width: 2;
+      rx: 10;
+      ry: 10;
+    }
+  </style>
+  
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+      refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280" />
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="white" />
+  
+  <!-- Title -->
+  <text x="300" y="30" class="title" text-anchor="middle">Simulation to Reality Loop</text>
+  
+  <!-- Digital Twin Block -->
+  <g transform="translate(50, 80)">
+    <rect class="block" width="120" height="80" class="digital-twin" />
+    <text x="60" y="30" class="subtitle" text-anchor="middle">Digital Twin</text>
+    <text x="60" y="50" class="subtitle" text-anchor="middle">&amp; Environment</text>
+    <rect x="20" y="60" width="80" height="15" fill="#a5b4fc" rx="5" ry="5" />
+    <text x="60" y="85" class="subtitle" text-anchor="middle">Physics Simulation</text>
+  </g>
+  
+  <!-- Simulator Block -->
+  <g transform="translate(200, 80)">
+    <rect class="block" width="120" height="80" class="simulator" />
+    <text x="60" y="30" class="subtitle" text-anchor="middle">Simulation</text>
+    <text x="60" y="50" class="subtitle" text-anchor="middle">Engine</text>
+    <text x="60" y="70" class="subtitle" text-anchor="middle">(Isaac Sim, Gazebo)</text>
+  </g>
+  
+  <!-- Control Algorithm Block -->
+  <g transform="translate(350, 80)">
+    <rect class="block" width="120" height="80" class="control" />
+    <text x="60" y="30" class="subtitle" text-anchor="middle">Control</text>
+    <text x="60" y="50" class="subtitle" text-anchor="middle">Algorithm</text>
+    <rect x="20" y="60" width="80" height="15" fill="#93c5fd" rx="5" ry="5" />
+    <text x="60" y="75" class="subtitle" text-anchor="middle">(RL, MPC)</text>
+  </g>
+  
+  <!-- Simulated Robot Block -->
+  <g transform="translate(200, 200)">
+    <rect class="block" width="120" height="60" class="robot" />
+    <text x="60" y="25" class="subtitle" text-anchor="middle">Simulated Robot</text>
+    <rect x="20" y="35" width="80" height="15" fill="#fca5a5" rx="5" ry="5" />
+    <text x="60" y="55" class="subtitle" text-anchor="middle">Training</text>
+  </g>
+  
+  <!-- Real Robot Block -->
+  <g transform="translate(350, 200)">
+    <rect class="block" width="120" height="60" class="reality" />
+    <text x="60" y="25" class="subtitle" text-anchor="middle">Real Robot</text>
+    <rect x="20" y="35" width="80" height="15" fill="#fca5a5" rx="5" ry="5" />
+    <text x="60" y="55" class="subtitle" text-anchor="middle">Deployment</text>
+  </g>
+  
+  <!-- Data Flow Arrows -->
+  <line x1="170" y1="120" x2="200" y2="120" class="connection" /> <!-- Digital Twin to Simulator -->
+  <line x1="320" y1="120" x2="350" y2="120" class="connection" /> <!-- Simulator to Control -->
+  <line x1="260" y1="160" x2="260" y2="200" class="connection" /> <!-- Simulator to Sim Robot -->
+  <line x1="410" y1="160" x2="410" y2="200" class="connection" /> <!-- Control to Real Robot -->
+  <line x1="470" y1="230" x2="470" y2="300" class="connection" /> <!-- Real Robot sensing -->
+  <line x1="470" y1="300" x2="260" y2="300" class="connection" /> <!-- Sensory data back to control -->
+  <line x1="260" y1="300" x2="200" y2="240" class="connection" /> <!-- Control to Real Robot -->
+  
+  <!-- Labels -->
+  <text x="185" y="110" class="flow-label" text-anchor="middle">Model</text>
+  <text x="185" y="125" class="flow-label" text-anchor="middle">Data</text>
+  
+  <text x="260" y="110" class="flow-label" text-anchor="middle">Simulation</text>
+  <text x="260" y="125" class="flow-label" text-anchor="middle">Data</text>
+  
+  <text x="380" y="110" class="flow-label" text-anchor="middle">Control</text>
+  <text x="380" y="125" class="flow-label" text-anchor="middle">Signals</text>
+  
+  <text x="260" y="185" class="flow-label" text-anchor="middle">Robot State</text>
+  <text x="410" y="185" class="flow-label" text-anchor="middle">Commands</text>
+  
+  <text x="470" y="255" class="flow-label" text-anchor="middle">Sensory</text>
+  <text x="470" y="270" class="flow-label" text-anchor="middle">Feedback</text>
+  
+  <text x="365" y="320" class="flow-label" text-anchor="middle">Policy</text>
+  <text x="365" y="335" class="flow-label" text-anchor="middle">Update</text>
+  
+  <!-- Annotation -->
+  <text x="300" y="370" class="subtitle" text-anchor="middle">
+    Closed-loop system: digital twin → simulation → control → real robot → sensory feedback
+  </text>
+</svg>

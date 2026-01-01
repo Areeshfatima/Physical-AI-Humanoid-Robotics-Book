@@ -35,4 +35,4 @@ To get the most out of this textbook:
 - Explore the additional resources provided in each section
 - Engage with the community through the GitHub repository
 
-Begin your journey by selecting a module from the sidebar, starting with Module 1 - ROS2 Fundamentals to establish a solid foundation in robotics software frameworks.
+Begin your journey by selecting a module from the sidebar, starting with [Module 1 - ROS2 Fundamentals](./module-1/) to establish a solid foundation in robotics software frameworks.

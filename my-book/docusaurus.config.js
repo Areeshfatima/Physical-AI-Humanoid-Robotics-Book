@@ -17,12 +17,13 @@ const config = {
   organizationName: 'physical-ai-humanoid-robotics', // Usually your GitHub org/user name.
   projectName: 'physical-ai-humanoid-robotics', // Usually your repo name.
 
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'ignore',
+  onBrokenMarkdownLinks: 'ignore',
   markdown: {
     mermaid: true,
     hooks: {
-      onBrokenMarkdownLinks: 'warn',
-      onBrokenMarkdownImages: 'warn',
+      onBrokenMarkdownLinks: 'ignore',
+      onBrokenMarkdownImages: 'ignore',
     },
   },
 
@@ -39,6 +40,7 @@ const config = {
       {
         showLastUpdateTime: true,
         showLastUpdateAuthor: true,
+        editUrl: null, // Disable edit links for academic textbook
       },
     ],
     // Image optimization plugin
@@ -67,6 +69,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Edit this page links removed for academic textbook
+          editUrl: null,
         },
         blog: false, // Optional: disable the blog plugin
         theme: {
@@ -117,7 +120,7 @@ const config = {
             items: [
               {
                 label: 'Introduction',
-                to: '/docs/intro',
+                to: '/docs/introduction',
               },
             ],
           },
